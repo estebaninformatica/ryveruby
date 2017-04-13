@@ -1,0 +1,2 @@
+class PostSender < Sender
+end
