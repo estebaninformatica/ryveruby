@@ -1,6 +1,7 @@
 module Ryveruby
   class Sender
     attr_reader :team_code, :text, :ryver_url
+    RYVER_URL = ENV["RYVER_URL"]
 
     def self.call(params)
       new(params).call
@@ -13,7 +14,7 @@ module Ryveruby
     end
 
     def call
-      connection.post "/application/webhook/#{team_code}", {body: text}
+      @connection.post "/application/webhook/#{team_code}", {body: text}
     end
   end
 end
