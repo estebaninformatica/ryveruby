@@ -1,2 +1,0 @@
-class MessageSender < Sender
-end

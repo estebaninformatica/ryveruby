@@ -1,2 +1,0 @@
-class PostSender < Sender
-end
