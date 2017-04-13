@@ -1,7 +1,5 @@
 require "ryveruby/version"
 
-module Ryveruby
-  # RYVER_URL
-  # Se tiene que teer declarada
-  # http://support.ryver.com/ryver-user-guide/
-end
+require_relative 'ryveruby/sender'
+require_relative 'ryveruby/message_sender'
+require_relative 'ryveruby/post_sender'
