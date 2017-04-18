@@ -37,3 +37,6 @@ This gem is in development now.
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/Esteban Damian Fuhrmann/ryveruby.
 
+## development
+
+Format specification: http://jsonapi.org

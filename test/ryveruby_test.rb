@@ -1,21 +1,19 @@
 require 'test_helper'
+# ENV["RYVER_URL"] = "www.bubub.com"
+ENV["TEAM_CODE"] = "IyocIW2IFuGipL"
 
 class RyverubyTest < Minitest::Test
-  def test_that_it_has_a_version_number
-    refute_nil ::Ryveruby::VERSION
-  end
-
-  def test_it_does_something_useful
-    assert false
-  end
 
   def test_invalid_without_ryver_team_code
-    byebug
-    assert false
+    assert Ryveruby::Sender.call(team_code: "")[:errors].first[:status] , 422
   end
 
   def test_invalid_without_text
-    assert false
+    assert Ryveruby::Sender.call(text: "")[:errors].first[:status] , 422
+  end
+    
+  def test_valid_sender
+    assert Ryveruby::Sender.call(text: "Hola",team_code: ENV["TEAM_CODE"])[:errors].first[:status] , 422
   end
 end
 

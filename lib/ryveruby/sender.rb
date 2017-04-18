@@ -1,7 +1,8 @@
 module Ryveruby
   class Sender
-    attr_reader :team_code, :text, :ryver_url
+    attr_reader :team_code, :text, :ryver_url, :errors
     RYVER_URL = ENV["RYVER_URL"]
+    RYVER_URL ||= "https://aerolaplata.ryver.com"
 
     def self.call(params)
       new(params).call
@@ -14,7 +15,29 @@ module Ryveruby
     end
 
     def call
-      @connection.post "/application/webhook/#{team_code}", {body: text}
+      valid?
+      unless @errors
+        @connection.post "/application/webhook/#{team_code}", {body: text}
+      else
+        return @errors
+      end
     end
+
+    private 
+    
+    def valid? 
+      if @team_code.to_s.empty? or @text.to_s.empty?
+        @errors = {
+          "errors": [
+            {
+              "status": "422",
+              "title":  "Required params",
+              "detail": "Team code and text are required."
+            }
+          ]
+        }
+      end
+    end
+
   end
 end
